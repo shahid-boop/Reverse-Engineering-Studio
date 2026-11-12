@@ -1,0 +1,9 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Reverse Engineering Studio",
+  "version": "0.1.0",
+  "identifier": "com.revstudio.desktop",
+  "build": {"beforeDevCommand":"npm run dev","devUrl":"http://localhost:5173","beforeBuildCommand":"npm run build","frontendDist":"../dist"},
+  "app": {"windows":[{"title":"Reverse Engineering Studio","width":1280,"height":820,"minWidth":760,"minHeight":600}],"security":{"csp":"default-src 'self'; connect-src ipc: http://ipc.localhost http://127.0.0.1:8000 http://localhost:8000; img-src 'self' asset: data: https:"}},
+  "bundle":{"active":true,"targets":"all","category":"DeveloperTool"}
+}

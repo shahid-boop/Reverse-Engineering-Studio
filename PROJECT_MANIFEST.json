@@ -1,0 +1,23 @@
+{
+  "name": "Reverse Engineering Studio",
+  "version": "0.1.0",
+  "status": "starter-foundation",
+  "platforms": [
+    "Windows",
+    "macOS",
+    "Linux",
+    "Web",
+    "Android"
+  ],
+  "file_count": 43,
+  "implemented": [
+    "React dashboard",
+    "FastAPI API",
+    "static file inspector",
+    "CLI",
+    "MCP starter",
+    "Tauri shell config",
+    "Capacitor config",
+    "starter tests"
+  ]
+}

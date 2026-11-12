@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+[project]
+name = "revstudio-cli"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = ["typer>=0.12","rich>=13.7"]
+[project.scripts]
+revstudio = "revstudio_cli.main:app"
+[tool.setuptools.packages.find]
+where = ["src"]

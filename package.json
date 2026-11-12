@@ -1,0 +1,15 @@
+{
+  "name": "reverse-engineering-studio",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": ["apps/web", "apps/mobile"],
+  "scripts": {
+    "dev": "npm --workspace apps/web run dev",
+    "build": "npm --workspace apps/web run build",
+    "preview": "npm --workspace apps/web run preview",
+    "desktop:dev": "npm --workspace apps/web run tauri:dev",
+    "desktop:build": "npm --workspace apps/web run tauri:build",
+    "mobile:sync": "npm --workspace apps/mobile run sync",
+    "mobile:android": "npm --workspace apps/mobile run android"
+  }
+}

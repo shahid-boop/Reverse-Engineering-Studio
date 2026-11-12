@@ -1,0 +1,8 @@
+pyproject.toml
+src/revstudio_engine/__init__.py
+src/revstudio_engine/static_inspector.py
+src/revstudio_engine/web_inspector.py
+src/revstudio_engine.egg-info/PKG-INFO
+src/revstudio_engine.egg-info/SOURCES.txt
+src/revstudio_engine.egg-info/dependency_links.txt
+src/revstudio_engine.egg-info/top_level.txt
