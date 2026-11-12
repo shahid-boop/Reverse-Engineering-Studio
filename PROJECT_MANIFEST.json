@@ -1,7 +1,7 @@
 {
   "name": "Reverse Engineering Studio",
-  "version": "0.1.0",
-  "status": "starter-foundation",
+  "version": "0.2.0",
+  "status": "deep-analysis",
   "platforms": [
     "Windows",
     "macOS",
@@ -11,13 +11,19 @@
   ],
   "file_count": 43,
   "implemented": [
-    "React dashboard",
+    "React dashboard (6 pages)",
     "FastAPI API",
     "static file inspector",
+    "deep PE analysis (sections, imports, resources, packing heuristics)",
+    "deep APK analysis (AXML manifest, permissions, components, DEX, assets)",
+    "code viewer (hex, strings, disasm, manifest, DEX, assets) with copy/download",
+    "evidence reports (scored findings, Markdown + HTML export)",
+    "JADX/APKTool decompilation adapter",
+    "web source analysis",
     "CLI",
-    "MCP starter",
+    "MCP tools",
     "Tauri shell config",
     "Capacitor config",
-    "starter tests"
+    "tests (46 passing)"
   ]
 }

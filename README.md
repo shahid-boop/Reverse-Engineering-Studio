@@ -5,7 +5,7 @@ Cross-platform starter monorepo for authorized, evidence-based software inspecti
 **Targets:** Web, Windows, macOS, Linux, Android.
 
 ## Included
-- `apps/web`: React + TypeScript dashboard.
+- `apps/web`: React + TypeScript dashboard (6 pages: Overview, Analysis lab, Code viewer, Evidence report, Projects, Agent tools).
 - `apps/web/src-tauri`: Tauri 2 desktop shell.
 - `apps/mobile`: Capacitor Android wrapper.
 - `services/api`: FastAPI local API.
@@ -15,10 +15,28 @@ Cross-platform starter monorepo for authorized, evidence-based software inspecti
 - `packages/shared-types`: shared TypeScript contracts.
 - `tests`: API and engine tests.
 
-This is a runnable starter foundation, not a finished REA clone. Deep decompilation, live device control, dynamic sandboxing, and advanced platform analyzers remain future implementation phases.
+## Features
+
+**Deep analysis (PE / APK)**
+- PE: headers, sections + entropy, imports/exports, resources, version info, .NET detection, Authenticode, overlay, packing heuristics.
+- APK: binary manifest decode (AXML), permissions, components, DEX class outlines, assets, native libs, signatures.
+
+**Code viewer (view / copy / download)**
+- Hex dump, printable strings, x86/x64 disassembly (capstone), decoded manifest XML, DEX outline, APK asset source.
+- Java sources via **JADX** and resources/smali via **APKTool** (external tools in `tools/`).
+
+**Evidence reports**
+- Scored findings (critical/high/medium/low/info) with concrete evidence lines and recommendations.
+- Markdown + self-contained HTML export, JSON download.
+
+**Surfaces**
+- Web UI, REST API (`/v1/analysis/deep|code-view|report|decompile|tools`), CLI (`revstudio inspect|deep|code|report|decompile|tools`), MCP server (6 tools).
+
+This is a runnable foundation. Live device control, dynamic sandboxing, and advanced platform analyzers remain future implementation phases.
 
 ## Requirements
 Node.js 20+, Python 3.11+. Rust stable for desktop builds. Android Studio + Android SDK for Android builds.
+Optional (for decompilation): a JRE 21+ and the tools described under **External tools**.
 
 ## Start API
 ```bash
@@ -38,6 +56,19 @@ npm run dev
 ```
 Open http://localhost:5173
 
+## External tools (JADX / APKTool)
+
+Place them under `tools/` (or point `REVSTUDIO_TOOLS` at that directory):
+
+```
+tools/
+  jre21/          # portable JRE (bin/java.exe)
+  jadx/           # jadx zip extracted (bin/jadx.bat, lib/)
+  apktool.jar     # APKTool jar
+```
+
+Check installation: `GET /v1/analysis/tools`, `revstudio tools`, or the `list_capabilities` MCP tool.
+
 ## Tests
 ```bash
 pip install -e ./engines/static-analysis
@@ -50,6 +81,10 @@ pytest
 pip install -e ./engines/static-analysis
 pip install -e ./services/cli
 revstudio inspect ./sample.bin
+revstudio deep ./sample.apk
+revstudio code ./sample.apk --view manifest
+revstudio report ./sample.apk
+revstudio decompile ./sample.apk --tool jadx --entry MainActivity
 
 pip install -e ./services/mcp-server
 revstudio-mcp

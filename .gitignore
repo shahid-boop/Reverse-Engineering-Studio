@@ -13,3 +13,15 @@ target/
 coverage/
 android/.gradle/
 android/local.properties
+
+# External decompiler tools (JRE/JADX/APKTool binaries — download separately)
+tools/
+
+# Python build artifacts
+*.egg-info/
+
+# Web build info
+apps/web/tsconfig.tsbuildinfo
+
+# Third-party sample binaries
+samples/where.exe

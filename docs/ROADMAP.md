@@ -6,15 +6,19 @@
 - [x] Static metadata, SHA-256, signature heuristics, printable strings
 - [x] CLI and MCP starter tools
 - [x] Starter tests
+- [x] Deep PE analysis (sections, imports, resources, version info, packing heuristics)
+- [x] APK manifest/DEX analysis (AXML decode, permissions, components, assets)
+- [x] Code viewer views (hex, strings, disasm, manifest, DEX, assets) with copy/download
+- [x] Evidence reports (scored findings, Markdown + HTML export)
+- [x] JADX/apktool adapter (Java sources, resources/smali)
+- [x] Web bundles and JavaScript analysis (web-source endpoint)
 - [ ] SQLite persistence and migrations
 - [ ] Streaming upload and background job queue
-- [ ] Deep PE/ELF/Mach-O analysis (Ghidra adapter)
-- [ ] APK manifest/resources (JADX/apktool adapter)
-- [ ] Web bundles and JavaScript analysis
+- [ ] Deep ELF/Mach-O analysis (Ghidra adapter)
 - [ ] .NET, Go, Rust and WASM analyzers
 - [ ] SQLite and network-capture analyzers
 - [ ] Local Ollama + cloud AI provider routing
-- [ ] Evidence graph, findings, report export
+- [ ] Evidence graph and findings correlation
 - [ ] Isolated dynamic-analysis sandbox with explicit opt-in
 - [ ] Authentication, encrypted secrets, audit log
 - [ ] E2E, accessibility, performance and packaging tests
