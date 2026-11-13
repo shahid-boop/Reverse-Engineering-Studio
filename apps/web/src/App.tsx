@@ -277,7 +277,7 @@ function OverviewPage() {
       )}
       <div className="section-heading modules-heading">
         <div><span className="eyebrow">CAPABILITIES</span><h2>Analysis modules</h2></div>
-        <span className="section-note">Foundation and planned integrations</span>
+        <span className="section-note">Working features, ready to use</span>
       </div>
       <div className="module-grid">
         {[
@@ -285,8 +285,10 @@ function OverviewPage() {
           { name: "Deep PE analysis", detail: "Sections, imports, exports, resources, packing heuristics", icon: Cpu, state: "Available" },
           { name: "Deep APK analysis", detail: "Manifest decode, permissions, DEX classes, assets", icon: Smartphone, state: "Available" },
           { name: "Code viewer", detail: "Hex, strings, disassembly, manifest, DEX, asset source", icon: Code2, state: "Available" },
+          { name: "Evidence reports", detail: "Scored findings with evidence, Markdown + HTML export", icon: ShieldCheck, state: "Available" },
+          { name: "Java decompilation", detail: "JADX Java sources + APKTool resources/smali", icon: Braces, state: "Available" },
+          { name: "Web source analysis", detail: "JS/TS/HTML imports, endpoints, secret findings", icon: Globe, state: "Available" },
           { name: "MCP agent bridge", detail: "Expose safe inspection tools to AI agents", icon: Workflow, state: "Available" },
-          { name: "Evidence reports", detail: "Traceable findings and exports", icon: ShieldCheck, state: "Planned" },
         ].map((m) => (
           <div className="module" key={m.name}>
             <div className="module-icon"><m.icon size={19} /></div>
@@ -1030,6 +1032,9 @@ function AgentsPage() {
     ["POST", "/v1/analysis/deep", "Deep PE / APK structural analysis"],
     ["POST", "/v1/analysis/web-source", "JS/TS imports, endpoints, secrets"],
     ["POST", "/v1/analysis/code-view", "hex · strings · disasm · manifest · dex · asset"],
+    ["POST", "/v1/analysis/report", "Scored evidence report (JSON + MD + HTML)"],
+    ["POST", "/v1/analysis/decompile", "JADX Java sources / APKTool resources+smali"],
+    ["GET", "/v1/analysis/tools", "Installed decompiler status (jadx/apktool/JRE)"],
     ["GET", "/v1/projects", "List projects"],
     ["POST", "/v1/projects", "Create a project"],
   ];
@@ -1037,6 +1042,8 @@ function AgentsPage() {
     ["inspect_local_file", "Static metadata, SHA-256, signature, strings"],
     ["analyze_deep_file", "PE headers/imports/resources or APK manifest/DEX/assets"],
     ["view_file_code", "hex, strings, disasm, manifest, dex, asset views"],
+    ["generate_evidence_report", "Scored findings with evidence, Markdown + HTML"],
+    ["decompile_apk", "JADX Java sources or APKTool decoded resources"],
     ["list_capabilities", "What this server can and cannot do"],
   ];
   const cliCommands = [
@@ -1044,6 +1051,9 @@ function AgentsPage() {
     "revstudio deep ./sample.apk",
     "revstudio code ./sample.exe --view disasm --target .text",
     "revstudio code ./sample.apk --view asset --target assets/www/app.js",
+    "revstudio report ./sample.apk --out report.html",
+    "revstudio decompile ./sample.apk --tool jadx --entry MainActivity",
+    "revstudio tools",
   ];
 
   return (
@@ -1065,7 +1075,7 @@ function AgentsPage() {
       </div>
       <div className="list-block">
         {endpoints.map(([method, path, desc]) => (
-          <div className="endpoint" key={path}>
+          <div className="endpoint" key={`${method} ${path}`}>
             <span className={`method ${method === "POST" ? "post" : ""}`}>{method}</span>
             <code className="inline">{path}</code>
             <span style={{ color: "#8292a9" }}>{desc}</span>
